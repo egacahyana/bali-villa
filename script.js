@@ -1,382 +1,386 @@
 // ============================================
-// BALINESE VILA - JavaScript Functionality
+// BALINESE VILA - PROFESSIONAL SCRIPT
 // ============================================
 
-// ---- Mobile Menu Toggle ----
-const menuBtn = document.getElementById("menuBtn");
-const navbar = document.querySelector("nav");
+console.log(
+  "%c🌴 Balinese Vila Resort & Spa 🌴",
+  "font-size: 20px; color: #10b981; font-weight: bold;",
+);
+console.log(
+  "%cWelcome to Luxury Experience",
+  "font-size: 14px; color: #059669;",
+);
 
-menuBtn?.addEventListener("click", () => {
-  navbar.classList.toggle("expanded");
-  console.log("Menu toggled");
+// ===== PAGE LOAD ANIMATIONS =====
+document.addEventListener("DOMContentLoaded", () => {
+  console.log("✅ Page loaded - Initializing animations...");
+
+  // Animate all elements with fade-in classes on page load
+  animateOnPageLoad();
+
+  // Initialize stagger animations for cards
+  initializeStaggerAnimations();
+
+  // Initialize intersection observer for scroll animations
+  initializeScrollAnimations();
+
+  // Set minimum dates for date inputs
+  setMinimumDates();
+
+  console.log("✅ All animations initialized!");
 });
 
-// ---- Smooth Scroll untuk Navigation ----
+// ===== FUNCTION: ANIMATE ON PAGE LOAD =====
+function animateOnPageLoad() {
+  const fadeInElements = document.querySelectorAll('[class*="animate-fade"]');
+
+  fadeInElements.forEach((element, index) => {
+    element.style.animationPlayState = "running";
+  });
+}
+
+// ===== FUNCTION: INITIALIZE STAGGER ANIMATIONS =====
+function initializeStaggerAnimations() {
+  const staggerItems = document.querySelectorAll(".stagger-item");
+
+  staggerItems.forEach((item, index) => {
+    // Remove opacity 0 to show animation
+    item.style.opacity = "1";
+  });
+
+  console.log(`✅ Initialized ${staggerItems.length} stagger items`);
+}
+
+// ===== FUNCTION: INTERSECTION OBSERVER FOR SCROLL =====
+function initializeScrollAnimations() {
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: "0px 0px -100px 0px",
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        // Add animation class when element enters viewport
+        if (entry.target.classList.contains("stagger-item")) {
+          entry.target.style.opacity = "1";
+        }
+
+        // Add glow animation to cards
+        if (entry.target.classList.contains("luxury-card")) {
+          entry.target.style.animation = "slideUp 0.6s ease-out forwards";
+        }
+      }
+    });
+  }, observerOptions);
+
+  // Observe all elements that need scroll animations
+  document
+    .querySelectorAll(
+      ".stagger-item, .luxury-card, .gallery-item, .testimonial-card, .trust-badge",
+    )
+    .forEach((el) => {
+      observer.observe(el);
+    });
+}
+
+// ===== FUNCTION: SET MINIMUM DATES =====
+function setMinimumDates() {
+  const today = new Date().toISOString().split("T")[0];
+  const dateInputs = document.querySelectorAll('input[type="date"]');
+  dateInputs.forEach((input) => {
+    input.setAttribute("min", today);
+  });
+}
+
+// ===== SMOOTH SCROLL NAVIGATION =====
 document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
   anchor.addEventListener("click", function (e) {
     e.preventDefault();
-    const target = document.querySelector(this.getAttribute("href"));
+    const targetId = this.getAttribute("href");
+    const target = document.querySelector(targetId);
+
     if (target) {
       target.scrollIntoView({
         behavior: "smooth",
         block: "start",
       });
+
+      // Highlight target element briefly
+      highlightElement(target);
     }
   });
 });
 
-// ---- Booking Button Click Handler ----
-const bookingBtn = document.getElementById("bookingBtn");
-bookingBtn?.addEventListener("click", () => {
-  const bookingSection = document.getElementById("booking");
-  bookingSection.scrollIntoView({
-    behavior: "smooth",
-    block: "start",
-  });
-  // Highlight form
-  const form = document.getElementById("bookingForm");
-  form?.classList.add("animate-pulse");
-  setTimeout(() => form?.classList.remove("animate-pulse"), 2000);
-});
-
-// ---- Booking Form Submission ----
-const bookingForm = document.getElementById("bookingForm");
-
-bookingForm?.addEventListener("submit", async (e) => {
-  e.preventDefault();
-
-  // Get form data
-  const formData = new FormData(bookingForm);
-  const bookingData = {
-    name:
-      formData.get("name") ||
-      document.querySelector('input[placeholder*="Nama"]').value,
-    email:
-      formData.get("email") ||
-      document.querySelector('input[type="email"]').value,
-    checkIn: document.querySelector('input[type="date"]:first-of-type').value,
-    checkOut: document.querySelectorAll('input[type="date"]')[1].value,
-    roomType: document.getElementById("roomType").value,
-    specialRequests: document.querySelector("textarea").value,
-    bookingDate: new Date().toISOString(),
-  };
-  document
-    .getElementById("bookingForm")
-    .addEventListener("submit", function (e) {
-      e.preventDefault();
-
-      const nama = document.getElementById("nama").value;
-      const checkin = document.getElementById("checkin").value;
-      const checkout = document.getElementById("checkout").value;
-      const tamu = document.getElementById("tamu").value;
-
-      const pesan = `Halo Balinese Villa,
-
-Saya ingin melakukan booking villa.
-
-Nama: ${nama}
-Check-in: ${checkin}
-Check-out: ${checkout}
-Jumlah Tamu: ${tamu}`;
-
-      const url = `https://wa.me/6289510855719?text=${encodeURIComponent(pesan)}`;
-
-      window.open(url, "_blank");
-    });
-
-  // Validasi form
-  if (
-    !bookingData.name ||
-    !bookingData.email ||
-    !bookingData.checkIn ||
-    !bookingData.checkOut ||
-    !bookingData.roomType
-  ) {
-    showNotification(
-      "⚠️ Silakan lengkapi semua field yang diperlukan",
-      "warning",
-    );
-    return;
-  }
-
-  // Validasi tanggal
-  const checkIn = new Date(bookingData.checkIn);
-  const checkOut = new Date(bookingData.checkOut);
-
-  if (checkIn >= checkOut) {
-    showNotification(
-      "❌ Tanggal check-out harus lebih besar dari check-in",
-      "error",
-    );
-    return;
-  }
-
-  if (checkIn < new Date()) {
-    showNotification("❌ Tanggal check-in tidak boleh di masa lalu", "error");
-    return;
-  }
-
-  // Simulasi API call - Nanti bisa diganti dengan API sebenarnya
-  console.log("Booking Data:", bookingData);
-  showNotification(
-    "✅ Booking berhasil! Tim kami akan menghubungi Anda segera.",
-    "success",
-  );
-
-  // Reset form
-  bookingForm.reset();
-
-  // Log untuk development
-  console.log("=== BOOKING INFORMATION ===");
-  console.log("Nama:", bookingData.name);
-  console.log("Email:", bookingData.email);
-  console.log("Check-in:", bookingData.checkIn);
-  console.log("Check-out:", bookingData.checkOut);
-  console.log("Tipe Kamar:", bookingData.roomType);
-  console.log("Permintaan Khusus:", bookingData.specialRequests);
-
-  // TODO: Uncomment untuk menggunakan API sebenarnya
-  /*
-    try {
-        const response = await fetch('/api/bookings', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(bookingData)
-        });
-        
-        if (response.ok) {
-            const result = await response.json();
-            showNotification('✅ Booking berhasil! ID: ' + result.bookingId, 'success');
-            bookingForm.reset();
-        } else {
-            showNotification('❌ Terjadi kesalahan. Silakan coba lagi.', 'error');
-        }
-    } catch (error) {
-        console.error('Error:', error);
-        showNotification('❌ Koneksi error. Silakan coba lagi.', 'error');
-    }
-    */
-});
-
-// ---- Room Card Click Handler ----
-const roomCards = document.querySelectorAll(".villa-card");
-roomCards.forEach((card) => {
-  const buttons = card.querySelectorAll("button");
-  buttons.forEach((button) => {
-    if (button.textContent.includes("Pesan")) {
-      button.addEventListener("click", (e) => {
-        e.preventDefault();
-
-        // Extract room type from card
-        const roomTitle = card.querySelector("h3").textContent;
-        const roomPrice = card.querySelector(
-          '[class*="text-3xl"][class*="font-bold"]',
-        ).textContent;
-
-        // Scroll to booking
-        document
-          .getElementById("booking")
-          .scrollIntoView({ behavior: "smooth" });
-
-        // Show message
-        showNotification(
-          `📌 ${roomTitle} dipilih. Lanjutkan dengan mengisi form booking.`,
-          "info",
-        );
-
-        console.log(`Room Selected: ${roomTitle} - ${roomPrice}`);
-      });
-    }
-  });
-});
-
-// ---- Notification System ----
-function showNotification(message, type = "info") {
-  // Remove existing notification
-  const existingNotification = document.querySelector(".notification");
-  if (existingNotification) {
-    existingNotification.remove();
-  }
-
-  // Create notification element
-  const notification = document.createElement("div");
-  notification.className =
-    "notification fixed bottom-4 right-4 z-50 max-w-md p-4 rounded-lg shadow-lg animate-slide-in";
-
-  // Set colors based on type
-  let bgColor = "bg-blue-500";
-  if (type === "success") bgColor = "bg-emerald-500";
-  if (type === "error") bgColor = "bg-red-500";
-  if (type === "warning") bgColor = "bg-yellow-500";
-  if (type === "info") bgColor = "bg-blue-500";
-
-  notification.innerHTML = `
-        <div class="${bgColor} text-white p-4 rounded-lg shadow-lg">
-            <p class="text-sm font-medium">${message}</p>
-        </div>
-    `;
-
-  document.body.appendChild(notification);
-
-  // Auto remove after 4 seconds
+// ===== FUNCTION: HIGHLIGHT ELEMENT =====
+function highlightElement(element) {
+  element.style.animation = "pulse-glow 0.6s ease-out";
   setTimeout(() => {
-    notification.style.animation = "slideOut 0.3s ease-in forwards";
-    setTimeout(() => notification.remove(), 300);
-  }, 4000);
+    element.style.animation = "none";
+  }, 600);
 }
 
-// ---- Price Calculator ----
-const roomPrices = {
-  deluxe: 850000,
-  premium: 1500000,
-  villa: 2500000,
-};
+// ===== BUTTON HOVER EFFECTS =====
+document.querySelectorAll(".btn-primary, .btn-secondary").forEach((button) => {
+  button.addEventListener("mouseenter", function () {
+    this.style.transform = "translateY(-2px)";
+  });
 
-function calculatePrice() {
-  const roomType = document.getElementById("roomType").value;
-  const checkInInput = document.querySelectorAll('input[type="date"]')[0];
-  const checkOutInput = document.querySelectorAll('input[type="date"]')[1];
+  button.addEventListener("mouseleave", function () {
+    this.style.transform = "translateY(0)";
+  });
 
-  if (!roomType || !checkInInput.value || !checkOutInput.value) {
-    return 0;
-  }
+  button.addEventListener("click", function (e) {
+    // Ripple effect
+    const ripple = document.createElement("span");
+    const rect = this.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
 
-  const checkIn = new Date(checkInInput.value);
-  const checkOut = new Date(checkOutInput.value);
-  const nights = Math.ceil((checkOut - checkIn) / (1000 * 60 * 60 * 24));
-  const pricePerNight = roomPrices[roomType] || 0;
+    ripple.style.position = "absolute";
+    ripple.style.left = x + "px";
+    ripple.style.top = y + "px";
+    ripple.style.width = "10px";
+    ripple.style.height = "10px";
+    ripple.style.background = "rgba(255, 255, 255, 0.6)";
+    ripple.style.borderRadius = "50%";
+    ripple.style.pointerEvents = "none";
+    ripple.style.animation = "ripple 0.6s ease-out";
 
-  return nights > 0 ? nights * pricePerNight : 0;
-}
+    this.style.position = "relative";
+    this.style.overflow = "hidden";
+    this.appendChild(ripple);
 
-// Add event listeners for price calculation
-document.getElementById("roomType")?.addEventListener("change", () => {
-  const totalPrice = calculatePrice();
-  if (totalPrice > 0) {
-    const priceText = `Total: Rp ${totalPrice.toLocaleString("id-ID")}`;
-    console.log(priceText);
-  }
+    setTimeout(() => ripple.remove(), 600);
+  });
 });
 
-document.querySelectorAll('input[type="date"]').forEach((input) => {
-  input.addEventListener("change", () => {
-    const totalPrice = calculatePrice();
-    if (totalPrice > 0) {
-      const priceText = `Total: Rp ${totalPrice.toLocaleString("id-ID")}`;
-      console.log(priceText);
+// Add ripple animation CSS
+const rippleStyle = document.createElement("style");
+rippleStyle.textContent = `
+    @keyframes ripple {
+        to {
+            transform: scale(4);
+            opacity: 0;
+        }
+    }
+`;
+document.head.appendChild(rippleStyle);
+
+// ===== CARD HOVER ANIMATIONS =====
+document.querySelectorAll(".luxury-card").forEach((card) => {
+  card.addEventListener("mouseenter", function () {
+    this.style.transform = "translateY(-12px) scale(1.02)";
+  });
+
+  card.addEventListener("mouseleave", function () {
+    this.style.transform = "translateY(0) scale(1)";
+  });
+});
+
+// ===== GALLERY IMAGE HOVER =====
+document.querySelectorAll(".gallery-item").forEach((item) => {
+  item.addEventListener("mouseenter", function () {
+    const img = this.querySelector("img");
+    if (img) {
+      img.style.filter = "brightness(1.1) saturate(1.2)";
+    }
+  });
+
+  item.addEventListener("mouseleave", function () {
+    const img = this.querySelector("img");
+    if (img) {
+      img.style.filter = "brightness(1) saturate(1)";
     }
   });
 });
 
-// ---- Promo Code Validator (untuk pengembangan selanjutnya) ----
-function validatePromoCode(code) {
-  const promoCodes = {
-    EARLYBIRD30: { discount: 30, type: "percentage" },
-    HONEYMOON25: { discount: 25, type: "percentage" },
-    FAMILY40: { discount: 40, type: "percentage" },
-    LONGSTAY35: { discount: 35, type: "percentage" },
-    WELCOME100K: { discount: 100000, type: "fixed" },
-  };
-
-  return promoCodes[code.toUpperCase()] || null;
-}
-
-// ---- Initialize on Page Load ----
-document.addEventListener("DOMContentLoaded", () => {
-  console.log("🌴 Balinese Vila Website Loaded");
-  console.log("Ready for bookings!");
-
-  // Set minimum date for check-in (today)
-  const today = new Date().toISOString().split("T")[0];
-  document.querySelectorAll('input[type="date"]').forEach((input) => {
-    input.setAttribute("min", today);
-  });
-
-  // Add CSS animations if not already present
-  if (!document.querySelector("style[data-animations]")) {
-    addAnimationStyles();
+// ===== NAVBAR SCROLL EFFECT =====
+window.addEventListener("scroll", () => {
+  const navbar = document.querySelector("nav");
+  if (window.scrollY > 50) {
+    navbar.style.boxShadow = "0 10px 30px rgba(0, 0, 0, 0.1)";
+  } else {
+    navbar.style.boxShadow = "0 4px 20px rgba(0, 0, 0, 0.05)";
   }
 });
 
-// ---- Add Animation Styles ----
-function addAnimationStyles() {
-  const style = document.createElement("style");
-  style.setAttribute("data-animations", "true");
-  style.textContent = `
-        @keyframes slideIn {
-            from {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-        
-        @keyframes slideOut {
-            from {
-                transform: translateX(0);
-                opacity: 1;
-            }
-            to {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-        }
-        
-        .animate-slide-in {
-            animation: slideIn 0.3s ease-out;
-        }
-        
-        @keyframes fadeInUp {
-            from {
-                transform: translateY(20px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-        
-        .fade-in-up {
-            animation: fadeInUp 0.6s ease-out;
-        }
+// ===== PARALLAX EFFECT =====
+window.addEventListener("scroll", () => {
+  const scrollTop = window.scrollY;
 
-        /* Smooth scroll behavior */
-        html {
-            scroll-behavior: smooth;
-        }
+  // Parallax untuk hero image
+  const heroImage = document.querySelector(".animate-fade-in-right");
+  if (heroImage) {
+    heroImage.style.transform = `translateY(${scrollTop * 0.3}px)`;
+  }
+});
 
-        /* Input focus styles */
-        input:focus,
-        textarea:focus,
-        select:focus {
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
-        }
+// ===== COUNTER ANIMATION =====
+function animateCounter(element, target, duration = 2000) {
+  let current = 0;
+  const increment = target / (duration / 16);
+
+  const timer = setInterval(() => {
+    current += increment;
+    if (current >= target) {
+      element.textContent = target;
+      clearInterval(timer);
+    } else {
+      element.textContent = Math.floor(current);
+    }
+  }, 16);
+}
+
+// ===== MOBILE MENU =====
+const menuBtn = document.getElementById("menuBtn");
+const navbar = document.querySelector("nav");
+
+if (menuBtn) {
+  menuBtn.addEventListener("click", () => {
+    navbar.classList.toggle("expanded");
+  });
+}
+
+// ===== WHATSAPP BUTTON ANIMATION =====
+const whatsappBtn = document.querySelector(".whatsapp-float");
+if (whatsappBtn) {
+  whatsappBtn.addEventListener("mouseenter", function () {
+    this.style.transform = "scale(1.15) translateY(-5px)";
+  });
+
+  whatsappBtn.addEventListener("mouseleave", function () {
+    this.style.transform = "scale(1) translateY(0)";
+  });
+
+  whatsappBtn.addEventListener("click", function () {
+    this.style.animation = "float 0.6s ease-out";
+  });
+}
+
+// ===== SCROLL TO TOP BUTTON =====
+function createScrollToTopButton() {
+  const button = document.createElement("a");
+  button.innerHTML = '<i class="fas fa-arrow-up"></i>';
+  button.className = "scroll-to-top";
+  button.href = "#";
+  button.style.cssText = `
+        position: fixed;
+        bottom: 100px;
+        right: 30px;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        z-index: 49;
+        box-shadow: 0 4px 20px rgba(16, 185, 129, 0.4);
+        text-decoration: none;
+        font-size: 20px;
     `;
-  document.head.appendChild(style);
+
+  document.body.appendChild(button);
+
+  window.addEventListener("scroll", () => {
+    if (window.pageYOffset > 300) {
+      button.style.opacity = "1";
+      button.style.visibility = "visible";
+      button.style.transform = "translateY(0)";
+    } else {
+      button.style.opacity = "0";
+      button.style.visibility = "hidden";
+      button.style.transform = "translateY(20px)";
+    }
+  });
+
+  button.addEventListener("click", (e) => {
+    e.preventDefault();
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  });
 }
 
-// ---- Utility: Format Currency ----
-function formatCurrency(amount) {
-  return new Intl.NumberFormat("id-ID", {
-    style: "currency",
-    currency: "IDR",
-    minimumFractionDigits: 0,
-  }).format(amount);
+// Create scroll to top button on page load
+document.addEventListener("DOMContentLoaded", () => {
+  createScrollToTopButton();
+});
+
+// ===== FORM HANDLING (If needed) =====
+const bookingForm = document.querySelector("form");
+if (bookingForm) {
+  bookingForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    console.log("Booking form submitted");
+  });
 }
 
-// ---- Export functions for external use ----
-window.BalineseVila = {
-  calculatePrice,
-  validatePromoCode,
-  formatCurrency,
-  showNotification,
-};
+// ===== PERFORMANCE MONITORING =====
+window.addEventListener("load", () => {
+  const performanceData = {
+    loadTime: performance.now(),
+    resourceCount: performance.getEntriesByType("resource").length,
+  };
 
-console.log("✅ All scripts loaded successfully!");
+  console.log("%cPerformance Stats:", "color: #059669; font-weight: bold;");
+  console.log(`Page Load Time: ${performanceData.loadTime.toFixed(2)}ms`);
+  console.log(`Resources Loaded: ${performanceData.resourceCount}`);
+});
+
+// ===== INTERSECTION OBSERVER FOR LAZY LOADING IMAGES =====
+if ("IntersectionObserver" in window) {
+  const imageObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const img = entry.target;
+        if (img.dataset.src) {
+          img.src = img.dataset.src;
+          img.classList.add("loaded");
+          observer.unobserve(img);
+        }
+      }
+    });
+  });
+
+  document.querySelectorAll("img[data-src]").forEach((img) => {
+    imageObserver.observe(img);
+  });
+}
+
+// ===== KEYBOARD NAVIGATION =====
+document.addEventListener("keydown", (e) => {
+  // Escape key to close any open menus
+  if (e.key === "Escape") {
+    const navbar = document.querySelector("nav");
+    if (navbar && navbar.classList.contains("expanded")) {
+      navbar.classList.remove("expanded");
+    }
+  }
+
+  // Enter key on buttons
+  if (e.key === "Enter" && e.target.matches("button")) {
+    e.target.click();
+  }
+});
+
+// ===== PRINT WELCOME MESSAGE =====
+console.log(
+  "%c✨ Selamat datang di Balinese Vila ✨",
+  "font-size: 16px; color: #10b981; font-weight: bold;",
+);
+console.log(
+  "%cLihat keindahan, rasakan kemewahan!",
+  "font-size: 13px; color: #059669;",
+);
+console.log(
+  "%c📍 Ubud, Bali | 🌟 Rating 4.9/5 | 👥 250+ Happy Guests",
+  "font-size: 12px; color: #666;",
+);
