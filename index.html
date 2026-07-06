@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Balinese Vila - Akomodasi Mewah di Tengah Alam</title>
+    <title>Balinese Vila - Luxury Resort & Spa</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -11,276 +11,744 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap"
       rel="stylesheet"
     />
+    <!-- Font Awesome untuk Icon Profesional -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
     <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
       body {
         font-family: "Poppins", sans-serif;
+        background: linear-gradient(135deg, #f0fdf4 0%, #f0f9ff 100%);
+        overflow-x: hidden;
       }
+
       .heading-display {
         font-family: "Playfair Display", serif;
+        letter-spacing: -0.5px;
       }
-      .gradient-overlay {
+
+      /* ===== PAGE LOAD ANIMATIONS ===== */
+      @keyframes fadeInDown {
+        from {
+          opacity: 0;
+          transform: translateY(-30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes fadeInLeft {
+        from {
+          opacity: 0;
+          transform: translateX(-30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      @keyframes fadeInRight {
+        from {
+          opacity: 0;
+          transform: translateX(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateY(60px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes pulse-glow {
+        0%,
+        100% {
+          box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+        }
+        50% {
+          box-shadow: 0 0 40px rgba(16, 185, 129, 0.6);
+        }
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+
+      /* ===== ANIMATION CLASSES ===== */
+      .animate-fade-in {
+        animation: fadeInUp 0.8s ease-out forwards;
+        opacity: 0;
+      }
+
+      .animate-fade-in-down {
+        animation: fadeInDown 0.8s ease-out forwards;
+        opacity: 0;
+      }
+
+      .animate-fade-in-left {
+        animation: fadeInLeft 0.8s ease-out forwards;
+        opacity: 0;
+      }
+
+      .animate-fade-in-right {
+        animation: fadeInRight 0.8s ease-out forwards;
+        opacity: 0;
+      }
+
+      .animate-slide-up {
+        animation: slideUp 0.8s ease-out forwards;
+        opacity: 0;
+      }
+
+      .animate-float {
+        animation: float 3s ease-in-out infinite;
+      }
+
+      .animate-glow {
+        animation: pulse-glow 2s ease-in-out infinite;
+      }
+
+      /* Stagger Animation */
+      .stagger-item {
+        animation: slideUp 0.6s ease-out forwards;
+        opacity: 0;
+      }
+
+      .stagger-item:nth-child(1) {
+        animation-delay: 0.1s;
+      }
+      .stagger-item:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+      .stagger-item:nth-child(3) {
+        animation-delay: 0.3s;
+      }
+      .stagger-item:nth-child(4) {
+        animation-delay: 0.4s;
+      }
+      .stagger-item:nth-child(5) {
+        animation-delay: 0.5s;
+      }
+      .stagger-item:nth-child(6) {
+        animation-delay: 0.6s;
+      }
+      .stagger-item:nth-child(7) {
+        animation-delay: 0.7s;
+      }
+      .stagger-item:nth-child(8) {
+        animation-delay: 0.8s;
+      }
+
+      /* ===== LUXURY STYLES ===== */
+      .nav-luxury {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(16, 185, 129, 0.1);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      }
+
+      .gradient-emerald {
+        background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      }
+
+      .gradient-premium {
+        background: linear-gradient(135deg, #0f766e 0%, #115e59 100%);
+      }
+
+      .luxury-card {
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        border: 1px solid rgba(16, 185, 129, 0.2);
         background: linear-gradient(
           135deg,
-          rgba(34, 197, 94, 0.1) 0%,
-          rgba(16, 185, 129, 0.1) 100%
+          rgba(255, 255, 255, 0.9) 0%,
+          rgba(240, 253, 244, 0.5) 100%
         );
+        backdrop-filter: blur(10px);
       }
-      .villa-card {
-        transition:
-          transform 0.3s ease,
-          box-shadow 0.3s ease;
+
+      .luxury-card:hover {
+        transform: translateY(-12px) scale(1.02);
+        box-shadow: 0 30px 60px rgba(16, 185, 129, 0.2);
+        border-color: rgba(16, 185, 129, 0.5);
       }
-      .villa-card:hover {
+
+      .icon-circle {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #d1fae5 0%, #ccfbf1 100%);
+        color: #047857;
+        font-size: 28px;
+        transition: all 0.3s ease;
+      }
+
+      .luxury-card:hover .icon-circle {
+        background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        color: white;
+        transform: scale(1.15) rotate(5deg);
+      }
+
+      /* ===== SMOOTH SCROLL ===== */
+      html {
+        scroll-behavior: smooth;
+      }
+
+      /* ===== BUTTON STYLES ===== */
+      .btn-primary {
+        position: relative;
+        overflow: hidden;
+        background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        color: white;
+        border: none;
+        padding: 14px 32px;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+      }
+
+      .btn-secondary {
+        border: 2px solid #10b981;
+        color: #047857;
+        background: transparent;
+        padding: 12px 30px;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .btn-secondary:hover {
+        background: rgba(16, 185, 129, 0.1);
+        transform: translateY(-2px);
+      }
+
+      /* ===== SECTION SPACING ===== */
+      .section-padding {
+        padding: 80px 20px;
+      }
+
+      /* ===== GALLERY IMAGES ===== */
+      .gallery-item {
+        position: relative;
+        overflow: hidden;
+        border-radius: 12px;
+        height: 320px;
+      }
+
+      .gallery-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.4s ease;
+      }
+
+      .gallery-item:hover img {
+        transform: scale(1.12) rotate(2deg);
+      }
+
+      /* ===== TRUST BADGE ===== */
+      .trust-badge {
+        background: linear-gradient(
+          135deg,
+          rgba(16, 185, 129, 0.1) 0%,
+          rgba(6, 182, 212, 0.1) 100%
+        );
+        border: 1px solid rgba(16, 185, 129, 0.3);
+        border-radius: 12px;
+        padding: 16px;
+        text-align: center;
+      }
+
+      /* ===== TESTIMONIAL CARD ===== */
+      .testimonial-card {
+        background: white;
+        border-radius: 12px;
+        padding: 32px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        border-left: 4px solid #10b981;
+        transition: all 0.3s ease;
+      }
+
+      .testimonial-card:hover {
         transform: translateY(-8px);
-        box-shadow: 0 20px 40px rgba(34, 197, 94, 0.15);
+        box-shadow: 0 15px 40px rgba(16, 185, 129, 0.2);
+      }
+
+      /* ===== RATING STARS ===== */
+      .stars {
+        color: #f59e0b;
+        letter-spacing: 2px;
+      }
+
+      /* ===== WHATSAPP BUTTON ===== */
+      .whatsapp-float {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 30px;
+        color: white;
+        cursor: pointer;
+        box-shadow: 0 4px 20px rgba(34, 197, 94, 0.4);
+        transition: all 0.3s ease;
+        z-index: 50;
+        text-decoration: none;
+      }
+
+      .whatsapp-float:hover {
+        transform: scale(1.15) translateY(-5px);
+        box-shadow: 0 8px 30px rgba(34, 197, 94, 0.6);
+      }
+
+      .whatsapp-float:active {
+        animation: float 0.6s ease-out;
+      }
+
+      /* ===== RESPONSIVE ===== */
+      @media (max-width: 768px) {
+        .section-padding {
+          padding: 50px 20px;
+        }
+
+        .gallery-item {
+          height: 250px;
+        }
       }
     </style>
   </head>
-  <body class="bg-gradient-to-br from-slate-50 via-emerald-50 to-teal-50">
-    <nav class="fixed w-full top-0 z-50 bg-white/80 backdrop-blur-md shadow-sm">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex justify-between items-center h-16">
-      
-      <div class="flex items-center gap-3">
-        <img src="image/logo/logo_villa.png" alt="Balinese Vila Logo" class="h-10 w-auto object-contain">
-        
-        <span class="text-xl font-bold tracking-wide text-emerald-800 font-serif">
-          Balinese Vila
-        </span>
-      </div>
-      
-      <div class="hidden md:flex gap-8">
-        <a href="#paket-kamar" class="text-gray-700 hover:text-emerald-700 transition font-medium text-sm tracking-wide">Paket Kamar</a>
-        <a href="#promo" class="text-gray-700 hover:text-emerald-700 transition font-medium text-sm tracking-wide">Promo</a>
-        <a href="#fasilitas" class="text-gray-700 hover:text-emerald-700 transition font-medium text-sm tracking-wide">Fasilitas</a>
-        <a href="#booking" class="text-gray-700 hover:text-emerald-700 transition font-medium text-sm tracking-wide">Booking</a>
-      </div>
-      
-      <button id="menuBtn" class="md:hidden text-emerald-700 text-2xl focus:outline-none">
-        ☰
-      </button>
-      
-    </div>
-  </div>
-</nav>
-    <!-- Hero Section -->
-    <section class="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
-      <div class="max-w-7xl mx-auto">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          <div>
-            <h1
-              class="text-5xl md:text-6xl font-bold heading-display text-emerald-900 mb-6 leading-tight"
-            >
-              Surga Tersembunyi di Tengah Alam Bali
-            </h1>
-            <p class="text-lg text-gray-700 mb-8 leading-relaxed">
-              Rasakan pengalaman menginap yang tak terlupakan di Balinese Vila,
-              tempat dimana kemewahan bertemu dengan keindahan alam Bali yang
-              memukau.
-            </p>
-            <div class="flex gap-4">
-              <button
-                id="bookingBtn"
-                class="px-8 py-4 bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-semibold rounded-lg hover:shadow-lg transform hover:scale-105 transition"
-              >
-                Pesan Sekarang
-              </button>
-              <button
-                class="px-8 py-4 border-2 border-emerald-600 text-emerald-700 font-semibold rounded-lg hover:bg-emerald-50 transition"
-              >
-                Pelajari Lebih Lanjut
-              </button>
+  <body>
+    <!-- Navigation -->
+    <nav class="fixed w-full top-0 z-50 nav-luxury">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 flex items-center justify-center">
+              <img
+                src="image/logo/logo_villa.png"
+                alt="Logo"
+                class="w-full h-full object-contain"
+              />
             </div>
-          </div>
-          <div class="relative">
-            <div
-              class="w-full h-96 rounded-2xl bg-gradient-to-br from-emerald-400 to-teal-500 overflow-hidden shadow-2xl"
+            <h1
+              class="text-2xl font-bold heading-display text-emerald-800 hidden sm:block"
             >
-              <div class="w-full h-full flex items-center justify-center">
-                <img
-                  src="image/hero/villa_main_.jpg"
-                  class="w-full h-full object-cover"
-                />
+              Balinese Vila
+            </h1>
+          </div>
+          <div class="hidden md:flex gap-8">
+            <a
+              href="#paket-kamar"
+              class="mt-3 text-gray-700 hover:text-emerald-700 transition font-medium"
+              >Paket Kamar</a
+            >
+            <a
+              href="#galeri"
+              class="mt-3 text-gray-700 hover:text-emerald-700 transition font-medium"
+              >Galeri</a
+            >
+            <a
+              href="#fasilitas"
+              class="mt-3 text-gray-700 hover:text-emerald-700 transition font-medium"
+              >Fasilitas</a
+            >
+            <a href="#booking" class="btn-primary">Booking</a>
+          </div>
+          <button id="menuBtn" class="md:hidden text-emerald-700 text-2xl">
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+      <div class="max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <!-- Left Content -->
+          <div>
+            <div class="animate-fade-in-down" style="animation-delay: 0s">
+              <span
+                class="inline-block px-4 py-2 rounded-full bg-emerald-100 text-emerald-700 font-semibold text-sm mb-6"
+              >
+                <i class="fas fa-crown"></i> Luxury Resort & Spa
+              </span>
+              <h1
+                class="text-5xl md:text-6xl font-bold heading-display text-gray-900 mb-6 leading-tight"
+              >
+                Surga Tersembunyi di Ubud
+              </h1>
+              <p class="text-lg text-gray-700 mb-8 leading-relaxed max-w-lg">
+                Rasakan kemewahan kelas dunia dalam harmoni sempurna dengan
+                keindahan alam Bali. Setiap momen dirancang untuk kesempurnaan
+                Anda.
+              </p>
+              <div class="flex gap-4">
+                <a href="#booking" class="btn-primary flex items-center gap-2">
+                  <i class="fas fa-calendar-check"></i> Pesan Sekarang
+                </a>
+                <button class="btn-secondary flex items-center gap-2">
+                  <i class="fas fa-arrow-right"></i> Pelajari Lebih Lanjut
+                </button>
               </div>
             </div>
-             <div class="absolute -bottom-8 -right-8 bg-white/90 backdrop-blur-md rounded-2xl p-5 shadow-xl max-w-xs border border-white/50 flex flex-col gap-1">
-  <!-- Baris Rating & Bintang -->
-  <div class="flex items-center gap-2">
-    <!-- Ikon Bintang Emas Modern -->
-    <div class="flex text-amber-400 text-lg">
-      ⭐
-    </div>
-    <!-- Angka Rating -->
-    <span class="text-2xl font-bold tracking-tight text-stone-800">4.9</span>
-    <span class="text-sm font-medium text-stone-400">/ 5</span>
-  </div>
-  
-  <!-- Deskripsi Ulasan -->
-  <p class="text-xs font-light text-stone-600 tracking-wide">
-    Dipercaya oleh <span class="font-semibold text-emerald-700">250+</span> ulasan tamu premium
-  </p>
-</div>
+          </div>
+
+          <!-- Right Image -->
+          <div class="animate-fade-in-right" style="animation-delay: 0.2s">
+            <div class="relative">
+              <div
+                class="absolute inset-0 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-3xl blur-2xl opacity-30"
+              ></div>
+              <img
+                src="image/hero/villa_main_.jpg"
+                alt="Luxury Villa"
+                class="relative rounded-3xl shadow-2xl w-full object-cover h-96"
+              />
+            </div>
+
+            <!-- Rating Card -->
+            <div
+              class="absolute bottom-8 right-8 bg-white rounded-2xl p-6 shadow-2xl max-w-xs animate-float"
+              style="animation-delay: 0.5s"
+            >
+              <div class="flex items-center gap-2 mb-2">
+                <div class="stars">★★★★★</div>
+                <span class="text-2xl font-bold text-gray-900">4.9</span>
+              </div>
+              <p class="text-sm text-gray-600">
+                Dipercaya oleh
+                <span class="font-semibold text-emerald-700">250+ tamu</span>
+                premium
+              </p>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Paket Kamar Section -->
-    <section id="paket-kamar" class="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+    <!-- About Section -->
+    <section class="section-padding bg-white">
+      <div class="max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <!-- Images -->
+          <div class="grid grid-cols-2 gap-4 order-2 lg:order-1">
+            <img
+              src="image/room/luxury_room.jpg"
+              alt="Villa"
+              class="rounded-2xl h-64 object-cover stagger-item shadow-lg"
+            />
+            <img
+              src="image/about/garden.jpg"
+              alt="Garden"
+              class="rounded-2xl h-64 object-cover stagger-item shadow-lg"
+              style="margin-top: 20px"
+            />
+            <img
+              src="image/about/pool.jpg"
+              alt="Pool"
+              class="rounded-2xl h-64 object-cover stagger-item shadow-lg"
+            />
+            <img
+              src="image/fasilitas/interior.jpg"
+              alt="Interior"
+              class="rounded-2xl h-64 object-cover stagger-item shadow-lg"
+              style="margin-top: 20px"
+            />
+          </div>
+
+          <!-- Content -->
+          <div class="order-1 lg:order-2">
+            <span
+              class="inline-block px-4 py-2 rounded-full bg-emerald-100 text-emerald-700 font-semibold text-sm mb-6"
+            >
+              <i class="fas fa-info-circle"></i> Tentang Kami
+            </span>
+            <h2
+              class="text-4xl md:text-5xl font-bold heading-display text-gray-900 mb-6"
+            >
+              Keindahan Alam Bertemu Kemewahan Modern
+            </h2>
+            <p class="text-lg text-gray-700 mb-8 leading-relaxed">
+              Balinese Vila adalah destinasi impian untuk mereka yang menghargai
+              kualitas, privasi, dan keindahan alam. Kami menghadirkan
+              pengalaman hospitality tingkat dunia dengan sentuhan budaya Bali
+              yang autentik.
+            </p>
+
+            <div class="space-y-6">
+              <div class="flex items-start gap-4">
+                <div class="icon-circle flex-shrink-0">
+                  <i class="fas fa-leaf"></i>
+                </div>
+                <div>
+                  <h3 class="font-bold text-gray-900 text-lg mb-1">
+                    Harmoni dengan Alam
+                  </h3>
+                  <p class="text-gray-600">
+                    Arsitektur berkelanjutan yang menghormati ekosistem sekitar
+                  </p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-4">
+                <div class="icon-circle flex-shrink-0">
+                  <i class="fas fa-gem"></i>
+                </div>
+                <div>
+                  <h3 class="font-bold text-gray-900 text-lg mb-1">
+                    Kemewahan Sejati
+                  </h3>
+                  <p class="text-gray-600">
+                    Fasilitas premium dengan perhatian terhadap setiap detail
+                  </p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-4">
+                <div class="icon-circle flex-shrink-0">
+                  <i class="fas fa-heart"></i>
+                </div>
+                <div>
+                  <h3 class="font-bold text-gray-900 text-lg mb-1">
+                    Layanan Istimewa
+                  </h3>
+                  <p class="text-gray-600">
+                    Tim profesional siap melayani Anda 24/7 dengan dedikasi
+                    penuh
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Room Packages -->
+    <section id="paket-kamar" class="section-padding">
       <div class="max-w-7xl mx-auto">
         <div class="text-center mb-16">
-          <h2 class="text-4xl font-bold heading-display text-emerald-900 mb-4">
-            Pilihan Kamar Eksklusif
+          <span
+            class="inline-block px-4 py-2 rounded-full bg-emerald-100 text-emerald-700 font-semibold text-sm mb-6"
+          >
+            <i class="fas fa-door-open"></i> Pilihan Kamar
+          </span>
+          <h2
+            class="text-4xl md:text-5xl font-bold heading-display text-gray-900 mb-4"
+          >
+            Kamar Eksklusif Kami
           </h2>
-          <p class="text-gray-600 max-w-2xl mx-auto">
-            Setiap kamar dirancang dengan sempurna untuk memberikan kenyamanan
-            maksimal dan pemandangan alam yang menakjubkan
+          <p class="text-gray-700 max-w-2xl mx-auto text-lg">
+            Setiap kamar dirancang dengan material berkualitas tinggi dan
+            teknologi modern untuk kenyamanan maksimal Anda
           </p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <!-- Kamar Deluxe -->
-          <div
-            class="villa-card rounded-2xl overflow-hidden bg-gradient-to-br from-slate-50 to-emerald-50 border-2 border-emerald-100"
-          >
+          <!-- Room 1 -->
+          <div class="luxury-card rounded-2xl overflow-hidden stagger-item">
             <div
               class="h-64 bg-gradient-to-br from-emerald-300 to-teal-400 overflow-hidden relative"
             >
               <img
                 src="image/room/deluxe_room.jpg"
                 alt="Deluxe Room"
-                class="w-full h-full object-cover"
+                class="w-full h-full object-cover hover:scale-110 transition duration-300"
               />
               <span
                 class="absolute top-4 right-4 bg-emerald-600 text-white px-4 py-2 rounded-full text-sm font-semibold"
-                >Standar</span
               >
+                <i class="fas fa-star"></i> Standar
+              </span>
             </div>
             <div class="p-8">
-              <h3 class="text-2xl font-bold text-emerald-900 mb-4">
+              <h3 class="text-2xl font-bold text-gray-900 mb-4 heading-display">
                 Deluxe Room
               </h3>
-              <ul class="space-y-2 mb-6 text-gray-700">
-                <li class="flex items-center gap-2">
-                  <span class="text-emerald-600">✓</span> 30 m² kamar spacious
-                </li>
-                <li class="flex items-center gap-2">
-                  <span class="text-emerald-600">✓</span> AC & Pemanas air
-                </li>
-                <li class="flex items-center gap-2">
-                  <span class="text-emerald-600">✓</span> Smart TV & WiFi gratis
-                </li>
-                <li class="flex items-center gap-2">
-                  <span class="text-emerald-600">✓</span> Balkon dengan
+              <div class="space-y-3 mb-6 text-gray-700">
+                <p class="flex items-center gap-2">
+                  <i class="fas fa-check text-emerald-600"></i> 30 m² dengan
                   pemandangan taman
-                </li>
-              </ul>
+                </p>
+                <p class="flex items-center gap-2">
+                  <i class="fas fa-check text-emerald-600"></i> AC inverter &
+                  pemanas air panas
+                </p>
+                <p class="flex items-center gap-2">
+                  <i class="fas fa-check text-emerald-600"></i> Smart TV & WiFi
+                  unlimited
+                </p>
+                <p class="flex items-center gap-2">
+                  <i class="fas fa-check text-emerald-600"></i> Balkon pribadi
+                  dengan pemandangan
+                </p>
+              </div>
               <div class="mb-6 pb-6 border-b-2 border-emerald-200">
                 <p class="text-3xl font-bold text-emerald-700">Rp 850.000</p>
                 <p class="text-sm text-gray-600">per malam (2 orang)</p>
               </div>
               <button
-                class="w-full bg-emerald-600 text-white py-3 rounded-lg hover:bg-emerald-700 transition font-semibold"
+                class="w-full btn-primary flex items-center justify-center gap-2"
               >
-                Pesan Sekarang
+                <i class="fas fa-calendar-check"></i> Pesan Sekarang
               </button>
             </div>
           </div>
 
-          <!-- Kamar Premium -->
+          <!-- Room 2 (Featured) -->
           <div
-            class="villa-card rounded-2xl overflow-hidden bg-gradient-to-br from-emerald-50 to-teal-50 border-2 border-emerald-300 md:scale-105 md:z-10"
+            class="luxury-card rounded-2xl overflow-hidden stagger-item md:scale-105 md:z-10 relative"
           >
+            <div
+              class="absolute -top-1 -left-1 -right-1 h-1 bg-gradient-to-r from-emerald-600 to-teal-600"
+            ></div>
             <div
               class="h-64 bg-gradient-to-br from-teal-400 to-cyan-400 overflow-hidden relative"
             >
               <img
                 src="image/room/premium_room.jpg"
-                alt="Premium Room"
-                class="w-full h-full object-cover"
+                alt="Premium Suite"
+                class="w-full h-full object-cover hover:scale-110 transition duration-300"
               />
               <span
                 class="absolute top-4 right-4 bg-teal-600 text-white px-4 py-2 rounded-full text-sm font-semibold"
               >
-                POPULER</span
-              >
+                <i class="fas fa-crown"></i> POPULER
+              </span>
             </div>
             <div class="p-8">
-              <h3 class="text-2xl font-bold text-teal-900 mb-4">
+              <h3 class="text-2xl font-bold text-gray-900 mb-4 heading-display">
                 Premium Suite
               </h3>
-              <ul class="space-y-2 mb-6 text-gray-700">
-                <li class="flex items-center gap-2">
-                  <span class="text-teal-600">✓</span> 50 m² dengan living area
-                </li>
-                <li class="flex items-center gap-2">
-                  <span class="text-teal-600">✓</span> Bathroom mewah & shower
-                  outdoor
-                </li>
-                <li class="flex items-center gap-2">
-                  <span class="text-teal-600">✓</span> Private pool di balkon
-                </li>
-                <li class="flex items-center gap-2">
-                  <span class="text-teal-600">✓</span> Layanan butler 24 jam
-                </li>
-              </ul>
+              <div class="space-y-3 mb-6 text-gray-700">
+                <p class="flex items-center gap-2">
+                  <i class="fas fa-check text-teal-600"></i> 50 m² dengan living
+                  area mewah
+                </p>
+                <p class="flex items-center gap-2">
+                  <i class="fas fa-check text-teal-600"></i> Bathroom marmer &
+                  shower outdoor
+                </p>
+                <p class="flex items-center gap-2">
+                  <i class="fas fa-check text-teal-600"></i> Private pool di
+                  balkon
+                </p>
+                <p class="flex items-center gap-2">
+                  <i class="fas fa-check text-teal-600"></i> Layanan butler 24
+                  jam
+                </p>
+              </div>
               <div class="mb-6 pb-6 border-b-2 border-teal-200">
                 <p class="text-3xl font-bold text-teal-700">Rp 1.500.000</p>
                 <p class="text-sm text-gray-600">per malam (2-3 orang)</p>
               </div>
               <button
-                class="w-full bg-gradient-to-r from-teal-600 to-cyan-600 text-white py-3 rounded-lg hover:shadow-lg transition font-semibold"
+                class="w-full gradient-emerald text-white font-bold py-3 rounded-lg hover:shadow-lg transition flex items-center justify-center gap-2"
               >
-                Pesan Sekarang
+                <i class="fas fa-calendar-check"></i> Pesan Sekarang
               </button>
             </div>
           </div>
 
-          <!-- Kamar Villa -->
-          <div
-            class="villa-card rounded-2xl overflow-hidden bg-gradient-to-br from-slate-50 to-emerald-50 border-2 border-emerald-100"
-          >
+          <!-- Room 3 -->
+          <div class="luxury-card rounded-2xl overflow-hidden stagger-item">
             <div
               class="h-64 bg-gradient-to-br from-emerald-400 to-green-500 overflow-hidden relative"
             >
               <img
                 src="image/room/luxury_room.jpg"
-                alt="Villa Mewah"
-                class="w-full h-full object-cover"
+                alt="Deluxe Villa"
+                class="w-full h-full object-cover hover:scale-110 transition duration-300"
               />
               <span
                 class="absolute top-4 right-4 bg-green-700 text-white px-4 py-2 rounded-full text-sm font-semibold"
-                >Luxury</span
               >
+                <i class="fas fa-gem"></i> Luxury
+              </span>
             </div>
             <div class="p-8">
-              <h3 class="text-2xl font-bold text-green-900 mb-4">
-                Deluxe Villa
+              <h3 class="text-2xl font-bold text-gray-900 mb-4 heading-display">
+                luxury Villa
               </h3>
-              <ul class="space-y-2 mb-6 text-gray-700">
-                <li class="flex items-center gap-2">
-                  <span class="text-green-600">✓</span> 120 m² Villa pribadi
-                </li>
-                <li class="flex items-center gap-2">
-                  <span class="text-green-600">✓</span> Private infinity pool
-                </li>
-                <li class="flex items-center gap-2">
-                  <span class="text-green-600">✓</span> Ruang keluarga & dapur
-                  lengkap
-                </li>
-                <li class="flex items-center gap-2">
-                  <span class="text-green-600">✓</span> Concierge service
+              <div class="space-y-3 mb-6 text-gray-700">
+                <p class="flex items-center gap-2">
+                  <i class="fas fa-check text-green-600"></i> 120 m² private
+                  villa
+                </p>
+                <p class="flex items-center gap-2">
+                  <i class="fas fa-check text-green-600"></i> Private infinity
+                  pool
+                </p>
+                <p class="flex items-center gap-2">
+                  <i class="fas fa-check text-green-600"></i> Ruang keluarga &
+                  dapur lengkap
+                </p>
+                <p class="flex items-center gap-2">
+                  <i class="fas fa-check text-green-600"></i> Concierge service
                   premium
-                </li>
-              </ul>
+                </p>
+              </div>
               <div class="mb-6 pb-6 border-b-2 border-green-200">
                 <p class="text-3xl font-bold text-green-700">Rp 2.500.000</p>
                 <p class="text-sm text-gray-600">per malam (4-5 orang)</p>
               </div>
               <button
-                class="w-full bg-green-700 text-white py-3 rounded-lg hover:bg-green-800 transition font-semibold"
+                class="w-full bg-green-700 text-white font-bold py-3 rounded-lg hover:shadow-lg transition flex items-center justify-center gap-2"
               >
-                Pesan Sekarang
+                <i class="fas fa-calendar-check"></i> Pesan Sekarang
               </button>
             </div>
           </div>
@@ -289,134 +757,150 @@
     </section>
 
     <!-- Promo Section -->
-    <section id="promo" class="py-20 px-4 sm:px-6 lg:px-8 gradient-overlay">
+    <section
+      id="promo"
+      class="section-padding bg-gradient-to-br from-emerald-50 to-teal-50"
+    >
       <div class="max-w-7xl mx-auto">
         <div class="text-center mb-16">
-          <h2 class="text-4xl font-bold heading-display text-emerald-900 mb-4">
-            Promo Spesial Kami
+          <span
+            class="inline-block px-4 py-2 rounded-full bg-emerald-100 text-emerald-700 font-semibold text-sm mb-6"
+          >
+            <i class="fas fa-tag"></i> Penawaran Spesial
+          </span>
+          <h2
+            class="text-4xl md:text-5xl font-bold heading-display text-gray-900 mb-4"
+          >
+            Promo Eksklusif Kami
           </h2>
-          <p class="text-gray-700 max-w-2xl mx-auto">
-            Dapatkan penawaran eksklusif dan hemat hingga 40% untuk pemesanan
-            Anda
+          <p class="text-gray-700 max-w-2xl mx-auto text-lg">
+            Dapatkan penawaran terbaik dan hemat hingga 40% untuk pemesanan Anda
+            hari ini
           </p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <!-- Promo 1 -->
           <div
-            class="rounded-2xl bg-white p-8 shadow-lg border-l-4 border-emerald-600"
+            class="bg-white rounded-2xl p-8 shadow-lg border-l-4 border-emerald-600 stagger-item hover:shadow-2xl transition"
           >
             <div class="flex items-start justify-between mb-4">
               <div>
-                <h3 class="text-2xl font-bold text-emerald-900 mb-2">
-                  Early Bird Discount
+                <h3
+                  class="text-2xl font-bold text-gray-900 mb-2 flex items-center gap-2"
+                >
+                  <i class="fas fa-bolt text-emerald-600"></i> Early Bird
+                  Discount
                 </h3>
-                <p class="text-gray-600 mb-4">Pesan 30 hari sebelumnya</p>
+                <p class="text-gray-600">Pesan 30 hari sebelumnya</p>
               </div>
-              <span class="text-4xl font-bold text-emerald-600">-30%</span>
+              <span class="text-5xl font-bold text-emerald-600">-30%</span>
             </div>
             <ul class="space-y-2 text-gray-700 mb-6">
               <li class="flex items-center gap-2">
-                <span class="text-emerald-600">✓</span> Berlaku untuk semua tipe
-                kamar
+                <i class="fas fa-check text-emerald-600"></i> Berlaku untuk
+                semua tipe kamar
               </li>
               <li class="flex items-center gap-2">
-                <span class="text-emerald-600">✓</span> Gratis welcome drink
+                <i class="fas fa-check text-emerald-600"></i> Gratis welcome
+                drink premium
               </li>
               <li class="flex items-center gap-2">
-                <span class="text-emerald-600">✓</span> Room upgrade jika
+                <i class="fas fa-check text-emerald-600"></i> Upgrade kamar jika
                 tersedia
               </li>
             </ul>
             <p class="text-sm text-gray-500">Berlaku hingga 31 Desember 2024</p>
           </div>
 
-          <!-- Promo 2 -->
           <div
-            class="rounded-2xl bg-white p-8 shadow-lg border-l-4 border-teal-600"
+            class="bg-white rounded-2xl p-8 shadow-lg border-l-4 border-pink-600 stagger-item hover:shadow-2xl transition"
           >
             <div class="flex items-start justify-between mb-4">
               <div>
-                <h3 class="text-2xl font-bold text-teal-900 mb-2">
-                  Honeymoon Package
+                <h3
+                  class="text-2xl font-bold text-gray-900 mb-2 flex items-center gap-2"
+                >
+                  <i class="fas fa-heart text-pink-600"></i> Honeymoon Package
                 </h3>
-                <p class="text-gray-600 mb-4">
-                  Paket spesial untuk pengantin baru
-                </p>
+                <p class="text-gray-600">Untuk pengantin baru istimewa</p>
               </div>
-              <span class="text-4xl font-bold text-teal-600">-25%</span>
+              <span class="text-5xl font-bold text-pink-600">-25%</span>
             </div>
             <ul class="space-y-2 text-gray-700 mb-6">
               <li class="flex items-center gap-2">
-                <span class="text-teal-600">✓</span> Romantic dinner romantis
+                <i class="fas fa-check text-pink-600"></i> Romantic dinner di
+                villa
               </li>
               <li class="flex items-center gap-2">
-                <span class="text-teal-600">✓</span> Spa treatment couple gratis
-              </li>
-              <li class="flex items-center gap-2">
-                <span class="text-teal-600">✓</span> Airport transfer gratis
-              </li>
-            </ul>
-            <p class="text-sm text-gray-500">Berlaku hingga 31 Desember 2024</p>
-          </div>
-
-          <!-- Promo 3 -->
-          <div
-            class="rounded-2xl bg-white p-8 shadow-lg border-l-4 border-green-600"
-          >
-            <div class="flex items-start justify-between mb-4">
-              <div>
-                <h3 class="text-2xl font-bold text-green-900 mb-2">
-                  Family Weekend
-                </h3>
-                <p class="text-gray-600 mb-4">
-                  Akhir pekan berkualitas bersama keluarga
-                </p>
-              </div>
-              <span class="text-4xl font-bold text-green-600">-40%</span>
-            </div>
-            <ul class="space-y-2 text-gray-700 mb-6">
-              <li class="flex items-center gap-2">
-                <span class="text-green-600">✓</span> Anak-anak gratis (usia <
-                12)
-              </li>
-              <li class="flex items-center gap-2">
-                <span class="text-green-600">✓</span> Kids club & activity
+                <i class="fas fa-check text-pink-600"></i> Spa treatment couple
                 gratis
               </li>
               <li class="flex items-center gap-2">
-                <span class="text-green-600">✓</span> Breakfast buffet unlimited
+                <i class="fas fa-check text-pink-600"></i> Airport transfer
+                gratis
               </li>
             </ul>
-            <p class="text-sm text-gray-500">
-              Berlaku untuk check-in Jumat-Minggu
-            </p>
+            <p class="text-sm text-gray-500">Berlaku sepanjang tahun</p>
           </div>
 
-          <!-- Promo 4 -->
           <div
-            class="rounded-2xl bg-white p-8 shadow-lg border-l-4 border-cyan-600"
+            class="bg-white rounded-2xl p-8 shadow-lg border-l-4 border-blue-600 stagger-item hover:shadow-2xl transition"
           >
             <div class="flex items-start justify-between mb-4">
               <div>
-                <h3 class="text-2xl font-bold text-cyan-900 mb-2">
-                  Extended Stay
+                <h3
+                  class="text-2xl font-bold text-gray-900 mb-2 flex items-center gap-2"
+                >
+                  <i class="fas fa-users text-blue-600"></i> Family Weekend
                 </h3>
-                <p class="text-gray-600 mb-4">
-                  Menginap lebih lama, hemat lebih banyak
-                </p>
+                <p class="text-gray-600">Berkualitas bersama keluarga</p>
               </div>
-              <span class="text-4xl font-bold text-cyan-600">-35%</span>
+              <span class="text-5xl font-bold text-blue-600">-40%</span>
             </div>
             <ul class="space-y-2 text-gray-700 mb-6">
               <li class="flex items-center gap-2">
-                <span class="text-cyan-600">✓</span> Minimal 7 malam
+                <i class="fas fa-check text-blue-600"></i> Anak-anak gratis
+                (usia &lt; 12)
               </li>
               <li class="flex items-center gap-2">
-                <span class="text-cyan-600">✓</span> Free laundry service harian
+                <i class="fas fa-check text-blue-600"></i> Kids club & activity
+                gratis
               </li>
               <li class="flex items-center gap-2">
-                <span class="text-cyan-600">✓</span> Flexible check-in/out
+                <i class="fas fa-check text-blue-600"></i> Breakfast buffet
+                unlimited
+              </li>
+            </ul>
+            <p class="text-sm text-gray-500">Check-in Jumat-Minggu</p>
+          </div>
+
+          <div
+            class="bg-white rounded-2xl p-8 shadow-lg border-l-4 border-purple-600 stagger-item hover:shadow-2xl transition"
+          >
+            <div class="flex items-start justify-between mb-4">
+              <div>
+                <h3
+                  class="text-2xl font-bold text-gray-900 mb-2 flex items-center gap-2"
+                >
+                  <i class="fas fa-moon text-purple-600"></i> Extended Stay
+                </h3>
+                <p class="text-gray-600">
+                  Menginap lebih lama, hemat lebih banyak
+                </p>
+              </div>
+              <span class="text-5xl font-bold text-purple-600">-35%</span>
+            </div>
+            <ul class="space-y-2 text-gray-700 mb-6">
+              <li class="flex items-center gap-2">
+                <i class="fas fa-check text-purple-600"></i> Minimal 7 malam
+              </li>
+              <li class="flex items-center gap-2">
+                <i class="fas fa-check text-purple-600"></i> Free laundry
+                service harian
+              </li>
+              <li class="flex items-center gap-2">
+                <i class="fas fa-check text-purple-600"></i> Flexible
+                check-in/out
               </li>
             </ul>
             <p class="text-sm text-gray-500">Berlaku sepanjang tahun</p>
@@ -425,349 +909,595 @@
       </div>
     </section>
 
-    <!-- Fasilitas Section -->
-    <section id="fasilitas" class="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+    <!-- Facilities Section -->
+    <section id="fasilitas" class="section-padding bg-white">
       <div class="max-w-7xl mx-auto">
         <div class="text-center mb-16">
-          <h2 class="text-4xl font-bold heading-display text-emerald-900 mb-4">
-            Fasilitas & Amenities
+          <span
+            class="inline-block px-4 py-2 rounded-full bg-emerald-100 text-emerald-700 font-semibold text-sm mb-6"
+          >
+            <i class="fas fa-spa"></i> Fasilitas Lengkap
+          </span>
+          <h2
+            class="text-4xl md:text-5xl font-bold heading-display text-gray-900 mb-4"
+          >
+            Amenities Kelas Dunia
           </h2>
-          <p class="text-gray-600 max-w-2xl mx-auto">
-            Nikmati berbagai fasilitas kelas dunia untuk kenyamanan Anda
+          <p class="text-gray-700 max-w-2xl mx-auto text-lg">
+            Semua yang Anda butuhkan untuk liburan sempurna tersedia di sini
           </p>
         </div>
 
         <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-  <!-- Infinity Pool -->
-  <div class="text-center p-6 rounded-2xl bg-emerald-50 border border-emerald-200 hover:border-emerald-500 transition flex flex-col justify-between">
-    <div>
-      <!-- Ganti URL di src dengan link foto kolam renangmu -->
-      <img src="https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?w=500&auto=format&fit=crop&q=60" alt="Infinity Pool" class="w-full h-40 object-cover rounded-xl mb-4" />
-      <h3 class="font-bold text-gray-900">Infinity Pool</h3>
-    </div>
-  </div>
-
-  <!-- Spa & Wellness -->
-  <div class="text-center p-6 rounded-2xl bg-emerald-50 border border-emerald-200 hover:border-emerald-500 transition flex flex-col justify-between">
-    <div>
-      <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=500&auto=format&fit=crop&q=60" alt="Spa & Wellness" class="w-full h-40 object-cover rounded-xl mb-4" />
-      <h3 class="font-bold text-gray-900">Spa & Wellness</h3>
-    </div>
-  </div>
-
-  <!-- Fine Dining -->
-  <div class="text-center p-6 rounded-2xl bg-emerald-50 border border-emerald-200 hover:border-emerald-500 transition flex flex-col justify-between">
-    <div>
-      <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=500&auto=format&fit=crop&q=60" alt="Fine Dining" class="w-full h-40 object-cover rounded-xl mb-4" />
-      <h3 class="font-bold text-gray-900">Fine Dining</h3>
-    </div>
-  </div>
-
-  <!-- Library & Lounge -->
-  <div class="text-center p-6 rounded-2xl bg-emerald-50 border border-emerald-200 hover:border-emerald-500 transition flex flex-col justify-between">
-    <div>
-      <img src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=500&auto=format&fit=crop&q=60" alt="Library & Lounge" class="w-full h-40 object-cover rounded-xl mb-4" />
-      <h3 class="font-bold text-gray-900">Library & Lounge</h3>
-    </div>
-  </div>
-
-  <!-- Yoga Studio -->
-  <div class="text-center p-6 rounded-2xl bg-emerald-50 border border-emerald-200 hover:border-emerald-500 transition flex flex-col justify-between">
-    <div>
-      <img src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=500&auto=format&fit=crop&q=60" alt="Yoga Studio" class="w-full h-40 object-cover rounded-xl mb-4" />
-      <h3 class="font-bold text-gray-900">Yoga Studio</h3>
-    </div>
-  </div>
-
-  <!-- Garden & Landscape -->
-  <div class="text-center p-6 rounded-2xl bg-emerald-50 border border-emerald-200 hover:border-emerald-500 transition flex flex-col justify-between">
-    <div>
-      <img src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=500&auto=format&fit=crop&q=60" alt="Garden & Landscape" class="w-full h-40 object-cover rounded-xl mb-4" />
-      <h3 class="font-bold text-gray-900">Garden & Landscape</h3>
-    </div>
-  </div>
-
-  <!-- Car Rental -->
-  <div class="text-center p-6 rounded-2xl bg-emerald-50 border border-emerald-200 hover:border-emerald-500 transition flex flex-col justify-between">
-    <div>
-      <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=500&auto=format&fit=crop&q=60" alt="Car Rental" class="w-full h-40 object-cover rounded-xl mb-4" />
-      <h3 class="font-bold text-gray-900">Car Rental</h3>
-    </div>
-  </div>
-
-  <!-- WiFi Premium -->
-  <div class="text-center p-6 rounded-2xl bg-emerald-50 border border-emerald-200 hover:border-emerald-500 transition flex flex-col justify-between">
-    <div>
-      <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?w=500&auto=format&fit=crop&q=60" alt="WiFi Premium" class="w-full h-40 object-cover rounded-xl mb-4" />
-      <h3 class="font-bold text-gray-900">WiFi Premium</h3>
-    </div>
-  </div>
-</div>
-   <!-- Booking Section -->
-<section
-  id="booking"
-  class="py-24 px-6 bg-gradient-to-b from-emerald-50 to-white"
->
-  <div class="max-w-7xl mx-auto">
-
-    <!-- Header -->
-    <div class="text-center mb-12">
-      <span
-        class="inline-block px-4 py-2 rounded-full bg-emerald-100 text-emerald-700 font-medium"
-      >
-        Luxury Booking Experience
-      </span>
-
-      <h2 class="mt-6 text-5xl font-bold text-gray-900 heading-display">
-        Reserve Your Paradise
-      </h2>
-
-      <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
-        Nikmati pengalaman menginap eksklusif di tengah hamparan sawah hijau
-        Ubud dengan pelayanan terbaik khas Bali.
-      </p>
-    </div>
-
-    <!-- Booking Card -->
-    <div
-      class="bg-white rounded-[32px] shadow-2xl overflow-hidden border border-gray-100"
-    >
-      <div class="grid lg:grid-cols-2">
-
-        <!-- Left Side (now with image + content) -->
-        <div
-          class="bg-gradient-to-br from-emerald-700 via-emerald-600 to-teal-600 p-6 md:p-12 text-white"
-        >
-          <div class="grid grid-cols-1 md:grid-cols-1 gap-6 items-center">
-            <!-- Image column (hidden on small screens). Replace src with your image. -->
-            <div class="hidden md:block">
-              <img
-                src="image/fasilitas/gambar1.jpg"
-                alt="Gambar Villa"
-                class="w-full h-56 object-cover rounded-xl shadow-lg border-2 border-white/20"
-              />
-            </div>
-            <div class="hidden md:block">
-              <img
-                src="image/fasilitas/gambar2.jpg"
-                alt="Gambar Villa"
-                class="w-full h-56 object-cover rounded-xl shadow-lg border-2 border-white/20"
-              />
-            </div>
-
-            <!-- Text/content column -->
-            <div>
-              <h3 class="text-3xl font-bold mb-4">Balinese Villa</h3>
-
-              <p class="text-emerald-50 mb-6 leading-relaxed">
-                Rasakan ketenangan alam Bali dengan villa mewah yang dikelilingi
-                persawahan hijau dan pemandangan matahari terbit yang memukau.
-              </p>
-
-              <div class="space-y-4">
-                <div class="flex items-center gap-3">
-                  <i class="fas fa-check-circle"></i>
-                  <span>Private Pool</span>
-                </div>
-
-                <div class="flex items-center gap-3">
-                  <i class="fas fa-check-circle"></i>
-                  <span>Rice Field View</span>
-                </div>
-
-                <div class="flex items-center gap-3">
-                  <i class="fas fa-check-circle"></i>
-                  <span>Free Breakfast</span>
-                </div>
-
-                <div class="flex items-center gap-3">
-                  <i class="fas fa-check-circle"></i>
-                  <span>Airport Transfer</span>
-                </div>
+          <div class="luxury-card text-center p-6 rounded-2xl stagger-item">
+            <div class="mb-4 flex justify-center">
+              <div class="icon-circle w-16 h-16">
+                <i class="fas fa-water"></i>
               </div>
+            </div>
+            <h3 class="font-bold text-gray-900 mb-2">Infinity Pool</h3>
+            <p class="text-sm text-gray-600">
+              Dengan pemandangan sawah yang spektakuler
+            </p>
+          </div>
+
+          <div class="luxury-card text-center p-6 rounded-2xl stagger-item">
+            <div class="mb-4 flex justify-center">
+              <div class="icon-circle w-16 h-16">
+                <i class="fas fa-spa"></i>
+              </div>
+            </div>
+            <h3 class="font-bold text-gray-900 mb-2">Spa & Massage</h3>
+            <p class="text-sm text-gray-600">
+              Treatment tradisional dan modern
+            </p>
+          </div>
+
+          <div class="luxury-card text-center p-6 rounded-2xl stagger-item">
+            <div class="mb-4 flex justify-center">
+              <div class="icon-circle w-16 h-16">
+                <i class="fas fa-utensils"></i>
+              </div>
+            </div>
+            <h3 class="font-bold text-gray-900 mb-2">Fine Dining</h3>
+            <p class="text-sm text-gray-600">Kuliner internasional dan lokal</p>
+          </div>
+
+          <div class="luxury-card text-center p-6 rounded-2xl stagger-item">
+            <div class="mb-4 flex justify-center">
+              <div class="icon-circle w-16 h-16">
+                <i class="fas fa-book"></i>
+              </div>
+            </div>
+            <h3 class="font-bold text-gray-900 mb-2">Library & Lounge</h3>
+            <p class="text-sm text-gray-600">
+              Ruang santai yang nyaman dan tenang
+            </p>
+          </div>
+
+          <div class="luxury-card text-center p-6 rounded-2xl stagger-item">
+            <div class="mb-4 flex justify-center">
+              <div class="icon-circle w-16 h-16">
+                <i class="fas fa-om"></i>
+              </div>
+            </div>
+            <h3 class="font-bold text-gray-900 mb-2">Yoga Studio</h3>
+            <p class="text-sm text-gray-600">
+              Kelas yoga dengan instruktur bersertifikat
+            </p>
+          </div>
+
+          <div class="luxury-card text-center p-6 rounded-2xl stagger-item">
+            <div class="mb-4 flex justify-center">
+              <div class="icon-circle w-16 h-16">
+                <i class="fas fa-leaf"></i>
+              </div>
+            </div>
+            <h3 class="font-bold text-gray-900 mb-2">Garden & Landscape</h3>
+            <p class="text-sm text-gray-600">
+              Taman organik dengan tanaman tropis
+            </p>
+          </div>
+
+          <div class="luxury-card text-center p-6 rounded-2xl stagger-item">
+            <div class="mb-4 flex justify-center">
+              <div class="icon-circle w-16 h-16">
+                <i class="fas fa-car"></i>
+              </div>
+            </div>
+            <h3 class="font-bold text-gray-900 mb-2">Car Rental</h3>
+            <p class="text-sm text-gray-600">
+              Layanan transportasi pribadi tersedia
+            </p>
+          </div>
+
+          <div class="luxury-card text-center p-6 rounded-2xl stagger-item">
+            <div class="mb-4 flex justify-center">
+              <div class="icon-circle w-16 h-16">
+                <i class="fas fa-wifi"></i>
+              </div>
+            </div>
+            <h3 class="font-bold text-gray-900 mb-2">WiFi Premium</h3>
+            <p class="text-sm text-gray-600">
+              Koneksi ultra-cepat di seluruh area
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section
+      id="galeri"
+      class="section-padding bg-gradient-to-br from-gray-50 to-emerald-50"
+    >
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+          <span
+            class="inline-block px-4 py-2 rounded-full bg-emerald-100 text-emerald-700 font-semibold text-sm mb-6"
+          >
+            <i class="fas fa-images"></i> Galeri
+          </span>
+          <h2
+            class="text-4xl md:text-5xl font-bold heading-display text-gray-900 mb-4"
+          >
+            Jelajahi Keindahan Kami
+          </h2>
+          <p class="text-gray-700 max-w-2xl mx-auto text-lg">
+            Lihat sendiri keindahan setiap sudut Balinese Vila yang dirancang
+            dengan sempurna
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div class="gallery-item stagger-item">
+            <img
+              src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=600&h=400&fit=crop"
+              alt="Premium Suite"
+            />
+          </div>
+          <div class="gallery-item stagger-item">
+            <img
+              src="https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?w=600&h=400&fit=crop"
+              alt="Infinity Pool"
+            />
+          </div>
+          <div class="gallery-item stagger-item">
+            <img
+              src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=600&h=400&fit=crop"
+              alt="Spa"
+            />
+          </div>
+          <div class="gallery-item stagger-item">
+            <img
+              src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&h=400&fit=crop"
+              alt="Fine Dining"
+            />
+          </div>
+          <div class="gallery-item stagger-item">
+            <img
+              src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=600&h=400&fit=crop"
+              alt="Garden"
+            />
+          </div>
+          <div class="gallery-item stagger-item">
+            <img src="image/fasilitas/interior.jpg" alt="Interior" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="section-padding bg-white">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+          <span
+            class="inline-block px-4 py-2 rounded-full bg-emerald-100 text-emerald-700 font-semibold text-sm mb-6"
+          >
+            <i class="fas fa-quote-left"></i> Testimoni
+          </span>
+          <h2
+            class="text-4xl md:text-5xl font-bold heading-display text-gray-900 mb-4"
+          >
+            Pengalaman Tamu Kami
+          </h2>
+          <p class="text-gray-700 max-w-2xl mx-auto text-lg">
+            Dengarkan dari mereka yang telah merasakan keajaiban Balinese Vila
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="testimonial-card stagger-item">
+            <div class="flex items-center gap-4 mb-6">
+              <img
+                src="https://ui-avatars.com/api/?name=Sarah+Johnson&size=50&background=10b981&color=fff"
+                alt="Sarah"
+                class="w-12 h-12 rounded-full"
+              />
+              <div>
+                <h3 class="font-bold text-gray-900">Sarah Johnson</h3>
+                <p class="text-sm text-emerald-600">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i> 5/5
+                </p>
+              </div>
+            </div>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              "Balinese Vila adalah tempat sempurna untuk honeymoon kami.
+              Pemandangan dari private pool sangat memukau dan layanan stafnya
+              luar biasa profesional!"
+            </p>
+            <p class="text-xs text-gray-500">
+              <i class="fas fa-map-marker-alt"></i> Jakarta, Indonesia
+            </p>
+          </div>
+
+          <div class="testimonial-card stagger-item">
+            <div class="flex items-center gap-4 mb-6">
+              <img
+                src="https://ui-avatars.com/api/?name=Michael+Chen&size=50&background=0d9488&color=fff"
+                alt="Michael"
+                class="w-12 h-12 rounded-full"
+              />
+              <div>
+                <h3 class="font-bold text-gray-900">Michael Chen</h3>
+                <p class="text-sm text-emerald-600">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i> 5/5
+                </p>
+              </div>
+            </div>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              "Kualitas akomodasi melebihi ekspektasi. Makanan di restoran
+              sangat lezat dan spa treatments sangat memuaskan. Pasti akan
+              kembali lagi!"
+            </p>
+            <p class="text-xs text-gray-500">
+              <i class="fas fa-map-marker-alt"></i> Singapura
+            </p>
+          </div>
+
+          <div class="testimonial-card stagger-item">
+            <div class="flex items-center gap-4 mb-6">
+              <img
+                src="https://ui-avatars.com/api/?name=Emma+Wilson&size=50&background=059669&color=fff"
+                alt="Emma"
+                class="w-12 h-12 rounded-full"
+              />
+              <div>
+                <h3 class="font-bold text-gray-900">Emma Wilson</h3>
+                <p class="text-sm text-emerald-600">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i> 5/5
+                </p>
+              </div>
+            </div>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              "Liburan keluarga kami sangat memorable. Anak-anak menyukai kolam
+              renang dan aktivitas outdoor. Tim sangat ramah dan helpful!"
+            </p>
+            <p class="text-xs text-gray-500">
+              <i class="fas fa-map-marker-alt"></i> Sydney, Australia
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Trust Section -->
+    <section
+      class="section-padding bg-gradient-to-br from-emerald-50 to-teal-50"
+    >
+      <div class="max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div class="trust-badge text-center stagger-item">
+            <div class="text-4xl mb-3">
+              <i class="fas fa-shield-alt text-emerald-600"></i>
+            </div>
+            <h3 class="font-bold text-gray-900 mb-2 text-lg">
+              Pembatalan Gratis
+            </h3>
+            <p class="text-sm text-gray-600">
+              Batal hingga 48 jam sebelum check-in tanpa biaya
+            </p>
+          </div>
+
+          <div class="trust-badge text-center stagger-item">
+            <div class="text-4xl mb-3">
+              <i class="fas fa-clock text-emerald-600"></i>
+            </div>
+            <h3 class="font-bold text-gray-900 mb-2 text-lg">Dukungan 24/7</h3>
+            <p class="text-sm text-gray-600">
+              Tim siap membantu kapan saja Anda membutuhkan
+            </p>
+          </div>
+
+          <div class="trust-badge text-center stagger-item">
+            <div class="text-4xl mb-3">
+              <i class="fas fa-bolt text-emerald-600"></i>
+            </div>
+            <h3 class="font-bold text-gray-900 mb-2 text-lg">Check-in Cepat</h3>
+            <p class="text-sm text-gray-600">
+              Proses check-in hanya 10 menit saja
+            </p>
+          </div>
+
+          <div class="trust-badge text-center stagger-item">
+            <div class="text-4xl mb-3">
+              <i class="fas fa-crown text-emerald-600"></i>
+            </div>
+            <h3 class="font-bold text-gray-900 mb-2 text-lg">Rating 4.9/5</h3>
+            <p class="text-sm text-gray-600">
+              Dipercaya oleh 250+ tamu premium
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Booking Section -->
+    <section id="booking" class="section-padding bg-white">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-12">
+          <span
+            class="inline-block px-4 py-2 rounded-full bg-emerald-100 text-emerald-700 font-semibold text-sm mb-6"
+          >
+            <i class="fas fa-credit-card"></i> Pesan Sekarang
+          </span>
+          <h2
+            class="text-4xl md:text-5xl font-bold heading-display text-gray-900 mb-4"
+          >
+            Mulai Petualangan Anda
+          </h2>
+          <p class="text-gray-700 max-w-2xl mx-auto text-lg">
+            Hubungi kami melalui WhatsApp untuk mendapatkan penawaran terbaik
+            dan konsultasi gratis
+          </p>
+        </div>
+
+        <div class="flex justify-center">
+          <a
+            href="https://wa.me/6281234567890?text=Halo%20Balinese%20Vila%2C%20saya%20tertarik%20untuk%20booking%20kamar"
+            target="_blank"
+            class="btn-primary inline-flex items-center gap-3 px-8 py-4 text-lg"
+          >
+            <i class="text-2xl"></i>
+            <img
+              class="w-8 h-8 animate-fade-in"
+              src="image/logo/whatsapp.png"
+              alt=""
+              srcset=""
+            />
+            <span>Chat Melalui WhatsApp</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer
+      class="bg-gradient-to-b from-gray-900 to-gray-950 text-white py-16 px-4 sm:px-6 lg:px-8"
+    >
+      <div class="max-w-7xl mx-auto">
+        <div
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 mb-12"
+        >
+          <!-- Brand -->
+          <div>
+            <div class="flex items-center gap-3 mb-4">
+              <img
+                src="image/logo/logo_villa.png"
+                alt="Balinese Vila Logo"
+                class="w-10 h-10 rounded-full gradient-emerald flex items-center justify-center text-white font-bold"
+              />
+              <h3 class="text-xl font-bold heading-display text-emerald-400">
+                Balinese Vila
+              </h3>
+            </div>
+            <p class="text-gray-400 text-sm leading-relaxed">
+              Destinasi liburan mewah terdepan di Ubud. Ciptakan kenangan indah
+              di tengah keindahan alam Bali.
+            </p>
+          </div>
+
+          <!-- Navigation -->
+          <div>
+            <h4 class="font-semibold text-emerald-400 mb-4">
+              <i class="fas fa-compass"></i> Navigasi
+            </h4>
+            <ul class="space-y-3 text-gray-400 text-sm">
+              <li>
+                <a href="#paket-kamar" class="hover:text-emerald-400 transition"
+                  ><i class="fas fa-door-open"></i> Paket Kamar</a
+                >
+              </li>
+              <li>
+                <a href="#promo" class="hover:text-emerald-400 transition"
+                  ><i class="fas fa-tag"></i> Promo</a
+                >
+              </li>
+              <li>
+                <a href="#fasilitas" class="hover:text-emerald-400 transition"
+                  ><i class="fas fa-spa"></i> Fasilitas</a
+                >
+              </li>
+              <li>
+                <a href="#galeri" class="hover:text-emerald-400 transition"
+                  ><i class="fas fa-images"></i> Galeri</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Contact -->
+          <div>
+            <h4 class="font-semibold text-emerald-400 mb-4">
+              <i class="fas fa-phone-alt"></i> Kontak
+            </h4>
+            <ul class="space-y-3 text-gray-400 text-sm">
+              <li class="flex items-center gap-2">
+                <i class="fas fa-map-marker-alt text-emerald-400"></i>
+                <span>Jl. Raya Ubud, Bali 80571</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <i class="fas fa-phone text-emerald-400"></i>
+                <span>+62 361-123-4567</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <i class="fas fa-whatsapp text-emerald-400"></i>
+                <span>+62 812-3456-7890</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <i class="fas fa-envelope text-emerald-400"></i>
+                <span>info@balinesevila.com</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Hours -->
+          <div>
+            <h4 class="font-semibold text-emerald-400 mb-4">
+              <i class="fas fa-clock"></i> Jam Operasional
+            </h4>
+            <ul class="space-y-2 text-gray-400 text-sm">
+              <li class="flex items-start gap-2">
+                <i class="fas fa-check text-emerald-400 mt-1"></i>
+                <span>Senin - Jumat: 08:00 - 21:00</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <i class="fas fa-check text-emerald-400 mt-1"></i>
+                <span>Sabtu - Minggu: 08:00 - 22:00</span>
+              </li>
+              <li class="mt-3 pt-3 border-t border-gray-700">
+                <span class="font-semibold text-emerald-400"
+                  >Customer Service:</span
+                ><br />
+                <span>24 Jam / 7 Hari</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Social -->
+          <div>
+            <h4 class="font-semibold text-emerald-400 mb-4">
+              <i class="fas fa-share-alt"></i> Ikuti Kami
+            </h4>
+            <div class="flex flex-wrap gap-3 mb-6">
+              <a
+                href="https://facebook.com"
+                target="_blank"
+                class="w-10 h-10 rounded-full bg-gray-700 hover:bg-emerald-600 flex items-center justify-center transition text-lg"
+              >
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a
+                href="https://instagram.com"
+                target="_blank"
+                class="w-10 h-10 rounded-full bg-gray-700 hover:bg-emerald-600 flex items-center justify-center transition text-lg"
+              >
+                <i class="fab fa-instagram"></i>
+              </a>
+              <a
+                href="https://twitter.com"
+                target="_blank"
+                class="w-10 h-10 rounded-full bg-gray-700 hover:bg-emerald-600 flex items-center justify-center transition text-lg"
+              >
+                <i class="fab fa-twitter"></i>
+              </a>
+              <a
+                href="https://youtube.com"
+                target="_blank"
+                class="w-10 h-10 rounded-full bg-gray-700 hover:bg-emerald-600 flex items-center justify-center transition text-lg"
+              >
+                <i class="fab fa-youtube"></i>
+              </a>
+            </div>
+            <p class="text-gray-500 text-xs">
+              <i class="fas fa-bell"></i> Subscribe untuk promo eksklusif
+            </p>
+          </div>
+        </div>
+
+        <hr class="border-gray-700 mb-8" />
+
+        <!-- Bottom Footer -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+          <div>
+            <p class="text-sm text-gray-400 mb-3">
+              <i class="fas fa-credit-card text-emerald-400"></i> Kami Menerima:
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span
+                class="px-3 py-1 rounded-full border border-gray-600 text-xs text-gray-400"
+                >Kartu Kredit</span
+              >
+              <span
+                class="px-3 py-1 rounded-full border border-gray-600 text-xs text-gray-400"
+                >Transfer Bank</span
+              >
+              <span
+                class="px-3 py-1 rounded-full border border-gray-600 text-xs text-gray-400"
+                >E-Wallet</span
+              >
+              <span
+                class="px-3 py-1 rounded-full border border-gray-600 text-xs text-gray-400"
+                >Midtrans</span
+              >
+            </div>
+          </div>
+
+          <div>
+            <p class="text-sm text-gray-400 mb-3">
+              <i class="fas fa-certificate text-emerald-400"></i> Kepercayaan:
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span
+                class="px-3 py-1 rounded-full border border-gray-600 text-xs text-gray-400"
+              >
+                <i class="fas fa-star"></i> Rating 4.9/5
+              </span>
+              <span
+                class="px-3 py-1 rounded-full border border-gray-600 text-xs text-gray-400"
+              >
+                <i class="fas fa-check"></i> Verified Booking
+              </span>
+              <span
+                class="px-3 py-1 rounded-full border border-gray-600 text-xs text-gray-400"
+              >
+                <i class="fas fa-lock"></i> Secure Payment
+              </span>
             </div>
           </div>
         </div>
 
-        <!-- Right Side Form -->
-        <div class="p-10 lg:p-12">
-          <form class="space-y-6">
-
-            <div>
-              <label class="block text-sm font-semibold text-gray-700 mb-2">
-                Nama Lengkap
-              </label>
-
-              <input
-                type="text"
-                placeholder="Masukkan nama lengkap"
-                class="w-full px-5 py-4 rounded-xl border border-gray-200 focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none transition"
-              >
-            </div>
-
-            <div>
-              <label class="block text-sm font-semibold text-gray-700 mb-2">
-                Email
-              </label>
-
-              <input
-                type="email"
-                placeholder="email@example.com"
-                class="w-full px-5 py-4 rounded-xl border border-gray-200 focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none transition"
-              >
-            </div>
-
-            <div class="grid md:grid-cols-2 gap-4">
-              <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-2">
-                  Check In
-                </label>
-
-                <input
-                  type="date"
-                  class="w-full px-5 py-4 rounded-xl border border-gray-200 focus:ring-2 focus:ring-emerald-500 outline-none"
-                >
-              </div>
-
-              <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-2">
-                  Check Out
-                </label>
-
-                <input
-                  type="date"
-                  class="w-full px-5 py-4 rounded-xl border border-gray-200 focus:ring-2 focus:ring-emerald-500 outline-none"
-                >
-              </div>
-            </div>
-
-            <div>
-              <label class="block text-sm font-semibold text-gray-700 mb-2">
-                Pilih Kamar
-              </label>
-
-              <select
-                class="w-full px-5 py-4 rounded-xl border border-gray-200 focus:ring-2 focus:ring-emerald-500 outline-none"
-              >
-                <option>Deluxe Room - Rp 850.000</option>
-                <option>Premium Suite - Rp 1.500.000</option>
-                <option>Private Villa - Rp 2.500.000</option>
-              </select>
-            </div>
-
-            <div>
-              <label class="block text-sm font-semibold text-gray-700 mb-2">
-                Pesan Khusus
-              </label>
-
-              <textarea
-                rows="4"
-                placeholder="Permintaan khusus..."
-                class="w-full px-5 py-4 rounded-xl border border-gray-200 focus:ring-2 focus:ring-emerald-500 outline-none resize-none"
-              ></textarea>
-            </div>
-
-           <button
-  type="button"
-  onclick="window.open('https://wa.me/6289510855719?text=Halo%20Balinese%20Villa,%20saya%20ingin%20memesan%20kamar.', '_blank')"
-  class="w-full py-5 rounded-xl bg-gradient-to-r from-amber-400 to-yellow-500 text-gray-900 font-bold text-lg hover:scale-[1.02] transition shadow-xl"
->
-  Book Now
-</button>
-            
-          
-
-          </form>
-        </div>
-
-      </div>
-    </div>
-
-  </div>
-</section>
-
-   <!-- Footer -->
-<footer class="bg-stone-950 text-stone-200 pt-16 pb-12 px-6 sm:px-12 lg:px-24 border-t border-stone-800/60 font-sans tracking-wide">
-  <div class="max-w-7xl mx-auto">
-    
-    <!-- Grid Utama -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 mb-16">
-      
-      <!-- Brand & Description (Lebih dominan di kiri) -->
-      <div class="lg:col-span-5 space-y-4">
-        <h3 class="text-2xl font-light tracking-widest text-emerald-400 uppercase font-serif">
-          Balinese Vila
-        </h3>
-        <p class="text-sm text-stone-400 font-light leading-relaxed max-w-sm">
-          Sebuah oasis ketenangan yang memadukan kemewahan modern dengan jiwa warisan budaya Bali. Temukan kedamaian sejati di tengah pelukan alam Ubud.
-        </p>
-      </div>
-
-      <!-- Navigasi -->
-      <div class="lg:col-span-2 space-y-4">
-        <h4 class="text-xs font-semibold uppercase tracking-widest text-stone-400">Navigasi</h4>
-        <ul class="space-y-3 text-sm font-light">
-          <li>
-            <a href="#paket-kamar" class="text-stone-400 hover:text-emerald-400 transition-colors duration-300 block">Paket Kamar</a>
-          </li>
-          <li>
-            <a href="#promo" class="text-stone-400 hover:text-emerald-400 transition-colors duration-300 block">Promo Premium</a>
-          </li>
-          <li>
-            <a href="#fasilitas" class="text-stone-400 hover:text-emerald-400 transition-colors duration-300 block">Fasilitas Eksklusif</a>
-          </li>
-        </ul>
-      </div>
-
-      <!-- Kontak -->
-      <div class="lg:col-span-3 space-y-4">
-        <h4 class="text-xs font-semibold uppercase tracking-widest text-stone-400">Kontak</h4>
-        <ul class="space-y-3 text-sm font-light text-stone-400">
-          <li class="flex items-start gap-2">
-            <span class="text-emerald-400">📍</span>
-            <span>Jl. Raya Sanggingan, Ubud,<br>Bali 80571, Indonesia</span>
-          </li>
-          <li class="flex items-center gap-2">
-            <span class="text-emerald-400">📞</span>
-            <a href="tel:+621234567890" class="hover:text-emerald-400 transition-colors">+62 123 456 7890</a>
-          </li>
-          <li class="flex items-center gap-2">
-            <span class="text-emerald-400">📧</span>
-            <a href="mailto:info@balinesevila.com" class="hover:text-emerald-400 transition-colors">info@balinesevila.com</a>
-          </li>
-        </ul>
-      </div>
-
-      <!-- Ikuti Kami & Newsletter singkat -->
-      <div class="lg:col-span-2 space-y-4">
-        <h4 class="text-xs font-semibold uppercase tracking-widest text-stone-400">Ikuti Kami</h4>
-        <div class="flex gap-6 text-sm font-light">
-          <a href="#" class="text-stone-400 hover:text-emerald-400 transition-transform hover:-translate-y-0.5 duration-300 block">
-            Instagram
-          </a>
-          <a href="#" class="text-stone-400 hover:text-emerald-400 transition-transform hover:-translate-y-0.5 duration-300 block">
-            Facebook
-          </a>
-          <a href="#" class="text-stone-400 hover:text-emerald-400 transition-transform hover:-translate-y-0.5 duration-300 block">
-            X
-          </a>
+        <!-- Copyright -->
+        <div class="border-t border-gray-700 pt-8 text-center">
+          <p class="text-gray-500 text-sm">
+            &copy; 2026 Balinese Vila. Semua hak dilindungi undang-undang.
+          </p>
         </div>
       </div>
+    </footer>
 
-    </div>
+    <!-- WhatsApp Float Button -->
+    <a
+      href="https://wa.me/6281234567890?text=Halo%20Balinese%20Vila%2C%20saya%20tertarik%20untuk%20booking%20"
+      target="_blank"
+      class="whatsapp-float"
+      title="Chat via WhatsApp"
+    >
+      <i class="fab fa-whatsapp"></i>
+    </a>
 
-    <!-- Garis Pembatas & Hak Cipta -->
-    <div class="border-t border-stone-800/80 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs font-light text-stone-500 tracking-wider">
-      <p>&copy; 2026 Balinese Vila. All Luxury Resorts Reserved.</p>
-      <div class="flex gap-6">
-        <a href="#" class="hover:text-stone-400 transition-colors">Privacy Policy</a>
-        <a href="#" class="hover:text-stone-400 transition-colors">Terms of Service</a>
-      </div>
-    </div>
-
-  </div>
-</footer>
-
-<script src="script.js"></script>
-</body>
+    <script src="script-professional.js"></script>
+  </body>
 </html>
